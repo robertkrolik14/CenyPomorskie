@@ -1,0 +1,41 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- script: dotnet publish --output /home/vsts/Ceny --runtime browser-wasm
+  displayName: 'dotnet publish for WASM'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '/home/vsts/Ceny/'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '/home/vsts/Ceny.zip'
+    replaceExistingArchive: true
+
+- task: CopyFilesOverSSH@0
+  inputs:
+    sshEndpoint: 'AzureUbuntu'
+    sourceFolder: '/home/vsts/'
+    contents: 'Ceny.zip'
+    targetFolder: '/var/www/deployment/'
+    readyTimeout: '20000'
+    failOnEmptySource: true
+
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'AzureUbuntu'
+    runOptions: 'inline'
+    inline: 'sudo sh /var/www/scripts/ceny-deploy.sh'
+    readyTimeout: '20000'
