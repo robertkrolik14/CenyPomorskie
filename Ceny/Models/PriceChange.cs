@@ -12,7 +12,7 @@ namespace Ceny.Models
 
         }
 
-        public PriceChange(string id,string nazwa,double startPrice,double endPrice)
+        public PriceChange(string id, string nazwa, double startPrice, double endPrice)
         {
             Id = id;
             Nazwa = nazwa;

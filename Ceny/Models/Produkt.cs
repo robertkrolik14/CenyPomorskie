@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Ceny.Extensions;
 namespace Ceny.Models
 {
-    public class Produkt : IComparable<Produkt>,IEquatable<Produkt>
+    public class Produkt : IComparable<Produkt>, IEquatable<Produkt>
     {
         public string Id { get; init; }
         public DateTime Data { get; set; }
@@ -18,9 +18,8 @@ namespace Ceny.Models
 
         public Produkt(string wiersz)
         {
-            var arr = wiersz.Replace("\"",null).Split(';');
+            var arr = wiersz.Replace("\"", null).Split(';');
             //przetwarzanie daty
-           
 
             //arr[2]-mieisąc
             //arr[5]-rok
@@ -38,7 +37,7 @@ namespace Ceny.Models
         => Cena.CompareTo(other.Cena);
 
         public override string ToString()
-            => $"{Nazwa} {Cena } zł ({Data:MMMM yyyy})";
+        => $"{Nazwa} {Cena } zł ({Data:MMMM yyyy})";
 
         public bool Equals(Produkt other)
         => other.Nazwa == Nazwa;

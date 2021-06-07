@@ -3,3 +3,7 @@
 ################################################################################
 
 /.vs
+/Ceny/bin/Debug/net5.0/ref/Ceny.dll
+/Ceny/bin/Debug/net5.0
+/Ceny/obj
+/Ceny/Ceny.csproj.user

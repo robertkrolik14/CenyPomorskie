@@ -21,24 +21,26 @@ namespace Ceny.Services
 
         public async Task<List<Produkt>> GetAll()
         {
-            if(_produkty is null) { 
-            var lista = new List<Produkt>(); 
-
-            for(var rok = 2006; rok <= 2019; rok++)
+            if (_produkty is null)
             {
-                var file = await httpClient.GetAsync($"/ceny/{rok}.csv");
-                var str= await file.Content.ReadAsStringAsync();
-                var lines = str.Split("\n");
+                var lista = new List<Produkt>();
 
-                for (var wiersz = 1; wiersz < lines.Length; wiersz++) { 
-                if(!String.IsNullOrEmpty(lines[wiersz]))
-                    lista.Add(new(lines[wiersz]));
+                for (var rok = 2006; rok <= 2019; rok++)
+                {
+                    var file = await httpClient.GetAsync($"/ceny/{rok}.csv");
+                    var str = await file.Content.ReadAsStringAsync();
+                    var lines = str.Split("\n");
+
+                    for (var wiersz = 1; wiersz < lines.Length; wiersz++)
+                    {
+                        if (!String.IsNullOrEmpty(lines[wiersz]))
+                            lista.Add(new(lines[wiersz]));
+
+                    }
 
                 }
-                
-            }
                 _produkty = lista;
-            return lista;
+                return lista;
             }
             return _produkty;
         }

@@ -1,48 +1,50 @@
 ﻿@page "/ProductDetails/{productId}"
 
-@if(produkty is null){
-<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>
+@if (produkty is null)
+{
+    <div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>
 }
-else{
-<h2>@nazwaProduktu</h2>
-<hr />
-<Chart Config="_config"></Chart>
-<table class="table table-bordered table-dark">
-    <thead>
-        <tr>
-            <th>Data</th>
-            <th>Cena</th>
-            <th>Zmiana</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for(var i=0;i<produkty.Count;i++)
-        {
-        <tr>
-            <td>@produkty[i].Data.ToString("MMMM yyyy")</td>
-            <td>@produkty[i].Cena zł</td>
-            <td>
-                @if (i > 0)
-                {
-                    var zmiana = produkty[i].Cena - produkty[i - 1].Cena;
-                    if (zmiana > 0) //cena wzrosła
-                    {
-                        <span style="color:red;"><span class="oi oi-caret-top"></span>@Math.Round(100-(produkty[i-1].Cena/produkty[i].Cena)*100,2)%</span>
-                    }
-                    else if (zmiana < 0)
-                    {
-                        <span style="color:lime;"><span class="oi oi-caret-bottom"></span>@Math.Round(100-(produkty[i-1].Cena/produkty[i].Cena)*100,2)%</span>
-                    }
-                    else
-                    {
-                        <span class="oi oi-caret-right"></span>
-                    }
-                }
-            </td>
-        </tr>
-        }
-    </tbody>
+else
+{
+    <h2>@nazwaProduktu</h2>
+    <hr />
+    <Chart Config="_config"></Chart>
+    <table class="table table-bordered table-dark">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Cena</th>
+                <th>Zmiana</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < produkty.Count; i++)
+            {
+                <tr>
+                    <td>@produkty[i].Data.ToString("MMMM yyyy")</td>
+                    <td>@produkty[i].Cena zł</td>
+                    <td>
+                        @if (i > 0)
+                        {
+                            var zmiana = produkty[i].Cena - produkty[i - 1].Cena;
+                            if (zmiana > 0) //cena wzrosła
+                            {
+                                <span style="color:red;"><span class="oi oi-caret-top"></span>@Math.Round(100 - (produkty[i - 1].Cena / produkty[i].Cena) * 100, 2)%</span>
+                            }
+                            else if (zmiana < 0)
+                            {
+                                <span style="color:lime;"><span class="oi oi-caret-bottom"></span>@Math.Round(100 - (produkty[i - 1].Cena / produkty[i].Cena) * 100, 2)%</span>
+                            }
+                            else
+                            {
+                                <span class="oi oi-caret-right"></span>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
 
-</table>
+    </table>
 }
 
