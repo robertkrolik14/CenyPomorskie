@@ -17,7 +17,7 @@ namespace Ceny.Services
         {
             httpClient = _httpClient;
         }
-
+        // TODO: https://refactoring.guru/pl/design-patterns/singleton/csharp/example#example-1
 
         public async Task<List<Produkt>> GetAll()
         {
