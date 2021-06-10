@@ -39,8 +39,8 @@ namespace Ceny.Services
                     }
 
                 }
-                _produkty = lista;
-                return lista;
+                _produkty = lista.Where(e => e.Cena > 0.00).ToList();
+                return _produkty;
             }
             return _produkty;
         }

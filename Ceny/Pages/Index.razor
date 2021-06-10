@@ -4,16 +4,23 @@
     <h1>Aplikacja CI/CD</h1>
     <h3>Statystyki</h3>
     <div class="d-flex justify-content-around align-items-center">
-        @*Najwiekszy wzrost ceny od początku*
-            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                <div class="card-header">Najwiekszy wzrost</div>
-                <div class="card-body">
-                      <h5 class="card-title">@BiggestIncrease.Nazwa</h5>
-            <p class="card-text">@Math.Round(BiggestIncrease.Change,2)%</p>
-                </div>
+        @*Najwiekszy wzrost ceny od początku *@
+        <div class="card text-white bg-danger mb-3" style="max-width: 25rem; min-width: 20rem;">
+            <div class="card-header">Najwiekszy wzrost</div>
+            <div class="card-body">
+                <h5 class="card-title">@BiggestIncrease.Nazwa</h5>
+                <p class="card-text">@Math.Round(BiggestIncrease.Change, 2)%</p>
             </div>
+        </div>
 
-        *@
+        @*Najwiekszy spadek ceny od początku *@
+        <div class="card text-white bg-success mb-3" style="max-width: 25rem; min-width: 20rem;">
+            <div class="card-header">Najwiekszy spadek</div>
+            <div class="card-body">
+                <h5 class="card-title">@BiggestDecrease.Nazwa</h5>
+                <p class="card-text">@Math.Round(BiggestDecrease.Change, 2)%</p>
+            </div>
+        </div>
     </div>
     <h3 style="margin-top:18px;">Historia cen dla pojedynczego produktu</h3>
 

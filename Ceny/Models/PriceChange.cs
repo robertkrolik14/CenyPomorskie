@@ -24,10 +24,21 @@ namespace Ceny.Models
         public string Nazwa { get; set; }
         public double StartPrice { get; set; }
         public double EndPrice { get; set; }
-
+        private double change;
+        private bool changeCalculated = false;
         public Double Change
         {
-            get => 100 - (EndPrice / StartPrice) * 100;
+            get 
+            {
+                if (changeCalculated == false)
+                {
+                    change = (EndPrice - StartPrice) / StartPrice * 100;
+                    changeCalculated = true;
+                }
+                return change;
+            }
+            
+            
         }
     }
 }

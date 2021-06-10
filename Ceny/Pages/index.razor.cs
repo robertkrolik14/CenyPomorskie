@@ -25,9 +25,22 @@ namespace Ceny.Pages
         private void NavigateToProductDetails(string id) => navigator.NavigateTo($"/ProductDetails/{id}");
 
 
+        private List<PriceChange> _changes;
+        private void CalculateChanges()
+        {
+            _changes = _produkty.GroupBy(g => g.Nazwa)
+               .Select(s => new PriceChange(s.First().Id, s.Key, s.OrderBy(o => o.Data).First().Cena, s.OrderBy(o => o.Data).Last().Cena))
+               .OrderByDescending(o => o.Change).ToList();
+
+            
+        }
+
+
+
         private PriceChange BiggestIncrease
         {
-            get => /*_produkty.Where(e => e.Nazwa == _produkty.GroupBy(g => g.Nazwa)
+            get
+            { /*_produkty.Where(e => e.Nazwa == _produkty.GroupBy(g => g.Nazwa)
 .Select(e => new
 {
     Nazwa = e.Key,
@@ -35,8 +48,28 @@ namespace Ceny.Pages
 }).OrderByDescending(o => o.Zmiana).FirstOrDefault().Nazwa).FirstOrDefault();
                 */
 
-                _produkty.GroupBy(g => g.Nazwa).Select(s => new PriceChange(s.First().Id, s.Key, s.OrderByDescending(o => o.Data).First().Cena, s.OrderBy(o => o.Data).First().Cena)).OrderByDescending(o => o.Change).FirstOrDefault();
+                if (_changes is null)
+                {
+                    CalculateChanges();
+                }
+                return _changes.First();
+            }
         }
+
+
+        private PriceChange BiggestDecrease
+        {
+            get
+            {
+                if (_changes is null)
+                {
+                    CalculateChanges();
+                }
+                return _changes.Last();
+
+            }
+        }
+
     }
 
 }
