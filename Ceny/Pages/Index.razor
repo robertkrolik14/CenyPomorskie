@@ -10,6 +10,7 @@
             <div class="card-body">
                 <h5 class="card-title">@BiggestIncrease.Nazwa</h5>
                 <p class="card-text">@Math.Round(BiggestIncrease.Change, 2)%</p>
+                <p class="card-text">@BiggestIncrease.StartPrice zł -> @BiggestIncrease.EndPrice zł</p>
             </div>
         </div>
 
@@ -19,6 +20,7 @@
             <div class="card-body">
                 <h5 class="card-title">@BiggestDecrease.Nazwa</h5>
                 <p class="card-text">@Math.Round(BiggestDecrease.Change, 2)%</p>
+                <p class="card-text">@BiggestDecrease.StartPrice zł -> @BiggestDecrease.EndPrice zł</p>
             </div>
         </div>
     </div>
